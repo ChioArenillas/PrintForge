@@ -21,12 +21,14 @@ export default function RootLayout({
 }: RootLayoutProps) {
   return (
     <html lang="en">
-       <Head>
+      <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className={`${albertSans.className} ${montserratAlternates.variable}`}>
+      <body className={`${albertSans.className} ${montserratAlternates.variable} min-h-screen flex flex-col`}>
         <Navbar />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>        
         <Footer />
       </body>
     </html>

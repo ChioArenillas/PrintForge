@@ -1,5 +1,6 @@
 import React from 'react'
 import HeroImageSquare from '@/public/hero-image-square.png'
+import Link from 'next/link'
 
 export default function AboutPage() {
     return (
@@ -19,13 +20,7 @@ export default function AboutPage() {
                         />
 
                     </div>
-                    <div>
-                        <p
-                            className="mb-4 text-sm text-gray-600 uppercase"
-                            aria-hidden="true"
-                        >
-                            About PrintForge
-                        </p>
+                    <div className='flex-1 space-y-6'>
                         <h2 className="mb-4 text-2xl font-semibold font-montserrat-alternates">
                             Empowering Makers Worldwide
                         </h2>
@@ -40,6 +35,15 @@ export default function AboutPage() {
                             creativity meets technology, enabling anyone to
                             bring their ideas to life through 3D printing.
                         </p>
+                        <div className="flex gap-4">
+                            <Link href="/about/contact">
+                                <button
+                                    className="px-6 py-3 text-black transition duration-100 bg-white border-2 border-black hover:bg-black hover:text-white hover:cursor-pointer"
+                                >
+                                    Contact
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
