@@ -23,6 +23,11 @@ export type CategoriesData = {
 export type GetModelsParams = {
     category?: string
 }
+export type ModelsPageProps = {
+    searchParams: {
+        query?: string
+    }
+}
 
 // Page Types
 export type RootLayoutProps = Readonly<{

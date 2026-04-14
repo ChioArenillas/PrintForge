@@ -1,24 +1,33 @@
 import React from 'react'
-import { getAllModels } from '@/app/lib/models'
-import type { Model } from "@/app/types"
-import ModelCard from '../components/ModelCard'
+import { getModels } from '@/app/lib/models'
+import ModelGrid from '../components/ModelGrid'
+import { ModelsPageProps } from '../types'
+import Form from "next/form"
 
-export default async function ModelsPage() {
+export default async function ModelsPage({ searchParams }: ModelsPageProps) {
 
-  const models = await getAllModels()
+  const models = await getModels()
+  const query = (await searchParams)?.query?.toLowerCase() || ""
+
+  const filterModels = query ?
+    models.filter(model =>
+      model.name.toLowerCase().includes(query)
+      || model.description.toLowerCase().includes(query)
+    )
+    : models
 
   return (
-     <div className="container px-4 py-8 mx-auto">
-      <h1 className="mb-8 text-3xl font-bold">All Models</h1>
-      <div
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        role="region"
-        aria-label="3D Models Gallery"
-      >
-        {models.map((model: Model) => (
-          <ModelCard key={model.id} model={model} />
-        ))}
-      </div>
-    </div>
+    <>
+      <Form action="/3d-models" className="w-full px-5 md:px-0 md:max-w-xl">
+        <input
+          type="text"
+          name="query"
+          placeholder='E.g. tool'
+          autoComplete='off'
+          defaultValue={query}
+          className="w-full py-3 pl-5 pr-5 text-sm placeholder-gray-500 bg-white border border-[#606060] rounded-full focus:border-[#606060] focus:outline-none focus:ring-0 md:text-base" />
+      </Form>
+      <ModelGrid title="3D Models" models={filterModels} />
+    </>
   )
 }
